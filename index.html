@@ -9,10 +9,16 @@
 </head>
 <body>
 
-  <!-- Semantic Header -->
+  <!-- Semantic Header with Mobile Toggle -->
   <header class="navbar">
     <a href="#" class="logo">EMBER & CRUMB</a>
-    <nav aria-label="Primary Navigation">
+
+    <!-- Toggle Button for Mobile Navigation -->
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+
+    <nav class="nav-menu" aria-label="Primary Navigation">
       <ul class="nav-links">
         <li><a href="#collection">Collection</a></li>
         <li><a href="#story">Our Story</a></li>

@@ -24,11 +24,13 @@ body {
 
 /* Header & Navigation (Flexbox) */
 .navbar {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 8%;
   border-bottom: 1px solid var(--surface);
+  background-color: var(--ivory);
 }
 
 .logo {
@@ -78,7 +80,7 @@ h1, h2, h3 {
 
 .hero h1 {
   font-size: clamp(2.25rem, 5vw, 4rem);
-  line-height: 1.2;
+  line-height: 1.15;
   margin-bottom: 1.5rem;
 }
 
@@ -116,7 +118,8 @@ h1, h2, h3 {
 }
 
 .section-header h2 {
-  font-size: 2rem;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.2;
   margin-bottom: 3rem;
 }
 
@@ -157,7 +160,8 @@ h1, h2, h3 {
 }
 
 .story h2 {
-  font-size: 2rem;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.2;
   margin-bottom: 1rem;
 }
 
@@ -174,4 +178,109 @@ h1, h2, h3 {
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: var(--text-muted);
+}
+
+/* ==========================================================================
+   HAMBURGER BUTTON STYLES
+   ========================================================================== */
+
+.nav-toggle {
+  display: none; /* Hidden on desktop screens */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1000;
+}
+
+.hamburger {
+  display: block;
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background-color: var(--espresso);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: var(--espresso);
+  transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+}
+
+.hamburger::before { top: -7px; }
+.hamburger::after  { top: 7px; }
+
+/* Active State for Hamburger Icon (Morphs into an 'X') */
+.nav-toggle.active .hamburger {
+  background-color: transparent;
+}
+
+.nav-toggle.active .hamburger::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav-toggle.active .hamburger::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES (@media)
+   ========================================================================== */
+
+/* Mobile Breakpoint: Screens 768px wide and below */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block; /* Show hamburger button */
+  }
+
+  /* Slide-down mobile drawer menu */
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--ivory);
+    border-bottom: 1px solid var(--surface);
+    padding: 2rem 8%;
+    transform: translateY(-150%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Active state when drawer opens */
+  .nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .hero {
+    padding: 4rem 6% 3rem;
+  }
+
+  .collection,
+  .story {
+    padding: 3.5rem 6%;
+  }
+
+  /* Product Grid: 1 column on mobile */
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
